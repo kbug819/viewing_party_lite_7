@@ -4,7 +4,12 @@ module Users
   module Movies
     class ViewingPartiesController < ApplicationController
       def new
-        @facade = ViewingPartiesFacade.new(params)
+        if current_user
+          @facade = ViewingPartiesFacade.new(params)
+        else
+          flash[:error] = 'Must be logged in or registered to create a movie party'
+          redirect_to user_movie_path(params[:user_id], params[:movie_id])
+        end
       end
 
       def create
