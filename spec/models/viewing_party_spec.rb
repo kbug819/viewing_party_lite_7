@@ -9,9 +9,9 @@ RSpec.describe ViewingParty, type: :model do
 
   describe '#invitees' do
     it "returns an array of user viewing party objects with the names and id's of users attending the viewing party with id matching to the returned objects" do
-      user_1 = User.create!(name: 'Jamie', email: '34@gmail.com')
-      user_2 = User.create!(name: 'Katie', email: '34997@gmail.com')
-      user_3 = User.create!(name: 'George', email: 'george@gmail.com')
+      user_1 = User.create!(name: 'Jamie', email: '34@gmail.com', password: '12345')
+      user_2 = User.create!(name: 'Katie', email: '34997@gmail.com', password: '12345')
+      user_3 = User.create!(name: 'George', email: 'george@gmail.com', password: '12345')
       viewing_party_1 = ViewingParty.create!(duration: 180, date: '2023-05-04', start_time: '07:00:00', movie_id: 238,
                                              host_user_id: user_2.id)
       UserViewingParty.create!(user: user_1, viewing_party: viewing_party_1)
