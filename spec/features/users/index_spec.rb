@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'Register', type: :feature do
   before :each do
-    @user_1 = User.create!(name: 'Jamie', email: '34@gmail.com')
-    @user_2 = User.create!(name: 'Katie', email: '34997@gmail.com')
+    @user_1 = User.create!(name: 'Jamie', email: '34@gmail.com', password: '12345')
+    @user_2 = User.create!(name: 'Katie', email: '34997@gmail.com', password: '12345')
 
     visit '/'
   end
@@ -24,6 +24,8 @@ RSpec.describe 'Register', type: :feature do
 
         fill_in 'Name', with: 'George'
         fill_in 'email', with: 'George@gmail.com'
+        fill_in 'password', with: '234'
+        fill_in 'password_confirmation', with: '234'
         click_button 'Register'
 
         user = User.find_by(name: 'George', email: 'George@gmail.com')

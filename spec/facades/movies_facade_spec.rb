@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe MoviesFacade do
   before :each do
-    @user_1 = User.create!(name: 'Lane', email: 'lane@example.com')
+    @user_1 = User.create!(name: 'Lane', email: 'lane@example.com', password: '12345')
   end
 
   it 'exists and has readable attributes' do

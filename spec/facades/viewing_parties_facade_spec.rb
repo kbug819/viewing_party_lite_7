@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe MoviesFacade do
   before :each do
-    @user_1 = User.create!(name: 'Lane', email: 'lane@example.com')
+    @user_1 = User.create!(name: 'Lane', email: 'lane@example.com', password: '12345')
   end
 
   it 'exists and has readable attributes' do
@@ -38,8 +38,8 @@ RSpec.describe MoviesFacade do
   end
 
   it '#create_user_viewing_party' do
-    user_2 = User.create!(name: 'Kaylee', email: 'Kaylee@example.com')
-    user_3 = User.create!(name: 'George', email: 'george@example.com')
+    user_2 = User.create!(name: 'Kaylee', email: 'Kaylee@example.com', password: '12345')
+    user_3 = User.create!(name: 'George', email: 'george@example.com', password: '12345')
     viewing_parties_facade = ViewingPartiesFacade.new({ movie_id: 238, user_id: @user_1.id, duration: 300, runtime: 175,
                                                         date: '2050-08-05', start_time: '12:00:00', "#{user_2.id}": '1', "#{user_3.id}": '0' })
 

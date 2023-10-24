@@ -4,9 +4,9 @@ require 'rails_helper'
 
 RSpec.describe 'user show page', type: :feature do
   before :each do
-    @user_1 = User.create!(name: 'Jamie', email: '34@gmail.com')
-    @user_2 = User.create!(name: 'Katie', email: '34997@gmail.com')
-    @user_3 = User.create!(name: 'George', email: 'george@gmail.com')
+    @user_1 = User.create!(name: 'Jamie', email: '34@gmail.com', password: '12345')
+    @user_2 = User.create!(name: 'Katie', email: '34997@gmail.com', password: '12345')
+    @user_3 = User.create!(name: 'George', email: 'george@gmail.com', password: '12345')
     @viewing_party_1 = ViewingParty.create!(duration: 180, date: '2023-05-14', start_time: '07:00:00', movie_id: 238,
                                             host_user_id: @user_2.id)
     @viewing_party_2 = ViewingParty.create!(duration: 180, date: '2023-05-16', start_time: '07:00:00', movie_id: 155,

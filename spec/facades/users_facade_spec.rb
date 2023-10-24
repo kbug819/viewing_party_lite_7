@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe MoviesFacade do
   before :each do
-    @user_1 = User.create!(name: 'Lane', email: 'lane@example.com')
+    @user_1 = User.create!(name: 'Lane', email: 'lane@example.com', password: '12345')
   end
 
   it 'exists and has readable attributes' do
@@ -16,7 +16,7 @@ RSpec.describe MoviesFacade do
 
   it '#invited_viewing_parties' do
     users_facade = UsersFacade.new({ id: @user_1.id })
-    user_2 = User.create!(name: 'Kaylee', email: 'kaylee@example.com')
+    user_2 = User.create!(name: 'Kaylee', email: 'kaylee@example.com', password: '12345')
     viewing_party_1 = ViewingParty.create!(duration: 300, date: '2050-08-05', start_time: '12:00:00', movie_id: 238,
                                            host_user_id: user_2.id)
     UserViewingParty.create!(user_id: @user_1.id, viewing_party_id: viewing_party_1.id)
@@ -26,7 +26,7 @@ RSpec.describe MoviesFacade do
 
   it '#hosted_viewing_parties' do
     users_facade = UsersFacade.new({ id: @user_1.id })
-    user_2 = User.create!(name: 'Kaylee', email: 'kaylee@example.com')
+    user_2 = User.create!(name: 'Kaylee', email: 'kaylee@example.com', password: '12345')
     viewing_party_1 = ViewingParty.create!(duration: 300, date: '2050-08-05', start_time: '12:00:00', movie_id: 238,
                                            host_user_id: @user_1.id)
     UserViewingParty.create!(user_id: user_2.id, viewing_party_id: viewing_party_1.id)

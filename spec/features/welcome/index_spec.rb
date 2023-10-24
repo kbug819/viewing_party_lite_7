@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe 'Welcome', type: :feature do
   before :each do
-    @user_1 = User.create!(name: 'Jamie', email: '34@gmail.com')
-    @user_2 = User.create!(name: 'Katie', email: '34997@gmail.com')
+    @user_1 = User.create!(name: 'Jamie', email: '34@gmail.com', password: '12345')
+    @user_2 = User.create!(name: 'Katie', email: '34997@gmail.com', password: '12345')
 
     visit '/'
   end
