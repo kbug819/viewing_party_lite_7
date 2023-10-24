@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   end
 
   get '/users/:id/discover', to: 'users/discover#index'
+  get '/login', to: "users#login_form"
+  post '/login', to: "users#login_user"
 end
