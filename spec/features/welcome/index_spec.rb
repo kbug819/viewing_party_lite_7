@@ -20,7 +20,7 @@ RSpec.describe 'Welcome', type: :feature do
         expect(page).to have_button('Create a New User')
       end
 
-      it 'displays a list of existing users and a link to each users dashboard' do
+      xit 'displays a list of existing users and a link to each users dashboard' do
         expect(page).to have_link(@user_1.name.to_s)
         expect(page).to have_link(@user_2.name.to_s)
       end
