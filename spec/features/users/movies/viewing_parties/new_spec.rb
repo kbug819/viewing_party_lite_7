@@ -12,6 +12,21 @@ RSpec.describe 'New Viewing Party Page', type: :feeature do
   feature 'As a user' do
     feature 'I should see the name of the movie title rendered above a form with fields' do
       scenario 'I see duration of party, when, start time, a list of users and a button to create a party' do
+        visit '/'
+        expect(page).to have_button("Log In")
+        click_button "Log In"
+    
+        expect(current_path).to eq('/login')
+        expect(page).to have_content("Unique Email:")
+        expect(page).to have_content("Password")
+    
+        fill_in :email, with: @user_1.email
+        fill_in :password, with: @user_1.password
+        click_on "Log In"
+    
+    
+        expect(current_path).to eq(user_path(@user_1))
+        expect(page).to have_content("Welcome, #{@user_1.name}")
         VCR.use_cassette('godfather_movie_details') do
           visit "/users/#{@user_1.id}/movies/238/viewing_parties/new"
 
@@ -41,6 +56,22 @@ RSpec.describe 'New Viewing Party Page', type: :feeature do
       feature 'I should be redirected to my dashboard where I see the party listed' do
         scenario 'all other users should also have party listed on dashboard' do
           VCR.use_cassette('godfather_movie_details') do
+
+            visit '/'
+            expect(page).to have_button("Log In")
+            click_button "Log In"
+        
+            expect(current_path).to eq('/login')
+            expect(page).to have_content("Unique Email:")
+            expect(page).to have_content("Password")
+        
+            fill_in :email, with: @user_1.email
+            fill_in :password, with: @user_1.password
+            click_on "Log In"
+        
+        
+            expect(current_path).to eq(user_path(@user_1))
+            expect(page).to have_content("Welcome, #{@user_1.name}")
             visit "/users/#{@user_1.id}/movies/238/viewing_parties/new"
 
             fill_in 'duration', with: 180
@@ -62,6 +93,22 @@ RSpec.describe 'New Viewing Party Page', type: :feeature do
     feature 'when I click create a party' do
       feature 'If duration entered is less than runtime ' do
         scenario 'I am rerouted to the form and I see a flash message with an error' do
+          visit '/'
+          expect(page).to have_button("Log In")
+          click_button "Log In"
+      
+          expect(current_path).to eq('/login')
+          expect(page).to have_content("Unique Email:")
+          expect(page).to have_content("Password")
+      
+          fill_in :email, with: @user_1.email
+          fill_in :password, with: @user_1.password
+          click_on "Log In"
+      
+      
+          expect(current_path).to eq(user_path(@user_1))
+          expect(page).to have_content("Welcome, #{@user_1.name}")
+          
           VCR.use_cassette('godfather_movie_details') do
             visit "/users/#{@user_1.id}/movies/238/viewing_parties/new"
 

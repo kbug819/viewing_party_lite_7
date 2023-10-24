@@ -9,7 +9,6 @@ class UsersController < ApplicationController
     if current_user
       @facade = UsersFacade.new(params)
     else
-      redirect_to '/'
       flash[:error] = "You must be logged in or registered to access user dashboard" unless current_user
     end
   end

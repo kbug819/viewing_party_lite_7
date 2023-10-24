@@ -11,6 +11,23 @@ RSpec.describe 'Movie Details Page', type: :feature do
   feature 'As a user' do
     feature 'When I visit a movies detail page, where :id is a valid user id' do
       scenario 'I should see a button to create a viewing party, a button to return to the discover page, the movie title, vote average of the movie, runtime in hours and minutes, genre(s) associated to the movie, summary description, the first 10 cast members, count of total reviews, each reviews author and information' do
+        
+        visit '/'
+        expect(page).to have_button("Log In")
+        click_button "Log In"
+    
+        expect(current_path).to eq('/login')
+        expect(page).to have_content("Unique Email:")
+        expect(page).to have_content("Password")
+    
+        fill_in :email, with: @user_1.email
+        fill_in :password, with: @user_1.password
+        click_on "Log In"
+    
+    
+        expect(current_path).to eq(user_path(@user_1))
+        expect(page).to have_content("Welcome, #{@user_1.name}")
+        
         visit "/users/#{@user_1.id}/discover"
 
         VCR.use_cassette('discover_movies_top_rated') do

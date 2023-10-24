@@ -10,8 +10,19 @@ RSpec.describe 'User Discover', type: :feature do
   feature 'As a user' do
     feature "When I go to a user dashboard and click the 'Discover Movies' button" do
       scenario 'it redirects to a discover page, where :id is the user_id of the user whose dashboard I was just on' do
-        visit "/users/#{@user_1.id}"
+        visit '/'
 
+        expect(page).to have_button("Log In")
+        click_button "Log In"
+    
+        fill_in :email, with: @user_1.email
+        fill_in :password, with: @user_1.password
+        click_on "Log In"
+    
+    
+        expect(current_path).to eq(user_path(@user_1))
+        expect(page).to have_content("Welcome, #{@user_1.name}")
+        
         click_button 'Discover Movies'
 
         expect(current_path).to eq("/users/#{@user_1.id}/discover")

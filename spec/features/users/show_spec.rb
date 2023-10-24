@@ -20,7 +20,23 @@ RSpec.describe 'user show page', type: :feature do
   feature 'As a user' do
     feature 'When I access my user show page' do
       scenario "I see the user's name, a button to discover movies and a list of viewing parties I am invited to, as well as a list of viewing parties I am hosting" do
+        visit '/'
+        expect(page).to have_button("Log In")
+        click_button "Log In"
+    
+        expect(current_path).to eq('/login')
+        expect(page).to have_content("Unique Email:")
+        expect(page).to have_content("Password")
+    
+        fill_in :email, with: @user_1.email
+        fill_in :password, with: @user_1.password
         VCR.use_cassette('user_dashboard_page_1') do
+        click_on "Log In"
+    
+    
+        expect(current_path).to eq(user_path(@user_1))
+        expect(page).to have_content("Welcome, #{@user_1.name}")
+        
           visit "/users/#{@user_1.id}"
         end
 
@@ -41,7 +57,21 @@ RSpec.describe 'user show page', type: :feature do
       feature 'and I look at my viewing party invitations' do
         scenario 'I see the movie image, the movie title (which links to that movies show page), the date and time of the party, who is hosting the event, and the list of users invited (with my name in bold)' do
           VCR.use_cassette('user_dashboard_page_2') do
-            visit "/users/#{@user_1.id}"
+            visit '/'
+            expect(page).to have_button("Log In")
+            click_button "Log In"
+        
+            expect(current_path).to eq('/login')
+            expect(page).to have_content("Unique Email:")
+            expect(page).to have_content("Password")
+        
+            fill_in :email, with: @user_1.email
+            fill_in :password, with: @user_1.password
+            click_on "Log In"
+        
+        
+            expect(current_path).to eq(user_path(@user_1))
+            expect(page).to have_content("Welcome, #{@user_1.name}")
           end
 
           VCR.use_cassette('poster_base_url') do
@@ -70,7 +100,21 @@ RSpec.describe 'user show page', type: :feature do
       feature "and I look at the viewing parties I'm hosting" do
         scenario 'I see the movie image, the movie title (which links to that movies show page), the date and time of the party, that I am hosting the event, and the list of users invited' do
           VCR.use_cassette('user_dashboard_page_3') do
-            visit "/users/#{@user_1.id}"
+            visit '/'
+            expect(page).to have_button("Log In")
+            click_button "Log In"
+        
+            expect(current_path).to eq('/login')
+            expect(page).to have_content("Unique Email:")
+            expect(page).to have_content("Password")
+        
+            fill_in :email, with: @user_1.email
+            fill_in :password, with: @user_1.password
+            click_on "Log In"
+        
+        
+            expect(current_path).to eq(user_path(@user_1))
+            expect(page).to have_content("Welcome, #{@user_1.name}")
           end
           VCR.use_cassette('hosted_parties') do
             within('.hosted_parties') do
